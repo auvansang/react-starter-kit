@@ -1,0 +1,12 @@
+{
+  "name": "@sa/i18n",
+  "description": "React Starter Kit",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "dependencies": {
+    "i18next": "^21.8.10",
+    "i18next-browser-languagedetector": "^6.1.4",
+    "react": "^18.2.0",
+    "react-i18next": "^11.17.2"
+  }
+}

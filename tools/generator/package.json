@@ -1,0 +1,10 @@
+{
+  "name": "@sa/generator",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.ts",
+  "dependencies": {
+    "handlebars": "^4.7.7",
+    "plop": "^3.1.1"
+  }
+}

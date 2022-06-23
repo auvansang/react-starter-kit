@@ -1,0 +1,30 @@
+{
+  "name": "@sa/admin",
+  "description": "Sisa Admin",
+  "version": "0.0.1",
+  "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@fontsource/noto-sans": "4.5.10",
+    "@fontsource/noto-sans-display": "^4.5.10",
+    "@fontsource/noto-sans-mono": "^4.5.9",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.8.5",
+    "@sa/auth": "^0.0.1",
+    "@sa/components": "^0.0.1",
+    "@sa/data-grid": "^0.0.1",
+    "@sa/form": "^0.0.1",
+    "@sa/http": "^0.0.1",
+    "@sa/i18n": "^0.0.1",
+    "@sa/router": "^0.0.1",
+    "@sa/store": "^0.0.1",
+    "@sa/utils": "^0.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "regenerator-runtime": "^0.13.9"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.14",
+    "@types/react-dom": "^18.0.5"
+  }
+}

@@ -1,0 +1,45 @@
+import { useForm, UseFormReturn, SubmitHandler, FieldValues, UseFormProps } from 'react-hook-form';
+
+import { DevTool, PLACEMENT } from '@hookform/devtools';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { object, AnySchema } from 'yup';
+
+type FormProps<TFieldValues extends FieldValues = FieldValues, TContext = any> = UseFormProps<
+  TFieldValues,
+  TContext
+> & {
+  validateSchema?: { [fieldName in keyof TFieldValues]: AnySchema };
+  onSubmit: SubmitHandler<TFieldValues>;
+  children: (methods: UseFormReturn<TFieldValues>) => React.ReactNode;
+  useDevTool?: boolean;
+  devToolPlacement?: PLACEMENT;
+};
+
+const Form = <TFieldValues extends FieldValues = FieldValues, TContext = any>(
+  props: FormProps<TFieldValues, TContext>
+) => {
+  const { validateSchema, onSubmit, useDevTool, devToolPlacement, ...rest } = props;
+
+  const methods = useForm({
+    ...rest,
+    resolver: yupResolver(
+      object<TFieldValues>()
+        .shape({ ...validateSchema })
+        .defined()
+    ),
+  });
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      {props.children(methods)}
+
+      {process.env.NODE_ENV === 'development' && useDevTool && (
+        // @ts-ignore
+        <DevTool control={control} placement={devToolPlacement} />
+      )}
+    </form>
+  );
+};
+
+export default Form;

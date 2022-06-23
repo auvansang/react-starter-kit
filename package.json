@@ -1,0 +1,44 @@
+{
+  "name": "@sa/rsk",
+  "version": "1.0.0",
+  "description": "React Starter Kit",
+  "author": {
+    "name": "Sang Au",
+    "email": "auvansang@outlook.com",
+    "url": "https://sangau.me"
+  },
+  "packageManager": "yarn@3.2.1",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "tests/*",
+    "libs/*",
+    "tools/*"
+  ],
+  "scripts": {
+    "start:identity": "APP=identity && ENV=dev && PORT=12002 && SOURCE_MAP=true && yarn g:start",
+    "build:identity": "APP=identity && ENV=prod && yarn g:build",
+    "test:identity": "APP=identity && yarn g:test",
+    "test:cov:identity": "APP=identity && yarn g:test:cov",
+    "start:admin:db": "json-server --watch mocks/db/admin.json --routes mocks/db/routes.json",
+    "start:admin": "APP=admin && ENV=dev && PORT=12200 && SOURCE_MAP=true && yarn g:start",
+    "build:admin": "APP=admin && ENV=prod && yarn g:build",
+    "lint": "eslint apps/**/*.{js,jsx,ts,tsx,json,css,scss,md}",
+    "lint:fix": "npm run lint --fix"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-tss-unused-classes": "^0.0.3",
+    "http-server": "^14.1.1",
+    "json-server": "^0.17.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  }
+}

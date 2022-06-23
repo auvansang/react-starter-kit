@@ -1,0 +1,22 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "name": "Coffee",
+      "description": "Coffee is a brewed drink prepared from roasted coffee beans, which are the seeds of berries from the Coffea plant. Coffee is brewed by diluting a large amount of nearly boiling water with the roasted coffee beans. The resulting coffee is called Espresso, and is served hot, without any added milk.",
+      "slug": "coffee",
+      "createdAt": "2020-05-06T12:00:00.000Z",
+      "createdBy": "5e9f8f8f8f8f8f8f8f8f8f8"
+    },
+    {
+      "id": "2",
+      "name": "Tea",
+      "description": "Tea is a beverage made from Camellia sinensis leaves, the leaves of Camellia sinensis, grown for their leafy green leaves and flower heads. The leaves are used to make a wide variety of beverages, including many herbal teas, and many types of beverages made from sugar cane juice, such as lemonade, made from sugar cane juice, and sugar-sweetened beverages, such as honey and lemonade.",
+      "slug": "tea",
+      "createdAt": "2020-05-06T12:00:00.000Z",
+      "createdBy": "5e9f8f8f8f8f8f8f8f8f8f8"
+    }
+  ],
+  "tags": [],
+  "articles": []
+}

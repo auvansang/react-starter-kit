@@ -1,0 +1,15 @@
+{
+  "name": "@sa/http",
+  "description": "React Starter Kit",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "file-saver": "^2.0.5",
+    "qs": "^6.10.5"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.5",
+    "@types/qs": "^6.9.7"
+  }
+}

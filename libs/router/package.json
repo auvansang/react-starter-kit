@@ -1,0 +1,16 @@
+{
+  "name": "@sa/router",
+  "description": "React Starter Kit",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.14",
+    "@types/react-dom": "^18.0.5"
+  }
+}
