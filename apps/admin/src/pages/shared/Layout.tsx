@@ -17,6 +17,7 @@ import Header from './components/Header';
 import SideNav from './components/SideNav';
 import { SideNavMenuItemProps } from './components/SideNavMenuItem';
 import { Outlet } from '@sa/router';
+import { Meta } from '@sa/components';
 
 const SideNavMenuItems: Array<SideNavMenuItemProps> = [
   {
@@ -82,14 +83,17 @@ const SideNavMenuItems: Array<SideNavMenuItemProps> = [
 
 const Layout = () => {
   return (
-    <Box sx={{ display: 'flex' }}>
-      <SideNav open items={SideNavMenuItems} version="1.0.0" />
-      <Header />
-      <Box component="main">
-        <Toolbar />
-        <Outlet />
+    <>
+      <Meta />
+      <Box sx={{ display: 'flex' }}>
+        <SideNav open items={SideNavMenuItems} version="1.0.0" />
+        <Header />
+        <Box component="main">
+          <Toolbar />
+          <Outlet />
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 
