@@ -3,7 +3,7 @@ export { default as PasswordInput, type PasswordInputProps } from './PasswordInp
 export { default as NumberInput, type NumberInputProps } from './NumberInput';
 export { default as DateInput } from './DateInput';
 export { default as TimeInput } from './TimeInput';
-export { default as DateTimeInput } from './DateTimeInput';
+export { default as DateTimeInput, type DateTimeInputProps } from './DateTimeInput';
 export { default as AutocompleteInput } from './AutocompleteInput';
 export { default as SelectInput, type SelectInputProps } from './SelectInput';
 export { default as SwitchInput } from './SwitchInput';

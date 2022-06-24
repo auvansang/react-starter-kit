@@ -8,3 +8,5 @@ export { default as PasswordField } from './PasswordField';
 export { default as NumberField } from './NumberField';
 
 export { default as SelectField } from './SelectField';
+
+export { default as DateTimeField } from './DateTimeField';
