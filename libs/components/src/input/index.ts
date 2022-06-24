@@ -5,7 +5,7 @@ export { default as DateInput } from './DateInput';
 export { default as TimeInput } from './TimeInput';
 export { default as DateTimeInput } from './DateTimeInput';
 export { default as AutocompleteInput } from './AutocompleteInput';
-export { default as SelectInput } from './SelectInput';
+export { default as SelectInput, type SelectInputProps } from './SelectInput';
 export { default as SwitchInput } from './SwitchInput';
 export { default as CheckboxInput } from './CheckboxInput';
 export { default as CheckboxGroupInput } from './CheckboxGroupInput';

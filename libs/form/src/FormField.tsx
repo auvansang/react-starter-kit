@@ -3,6 +3,8 @@ import TextField, { type TextFieldProps } from './TextField';
 import PasswordField, { type PasswordFieldProps } from './PasswordField';
 import NumberField, { type NumberFieldProps } from './NumberField';
 
+import SelectField, { type SelectFieldProps } from './SelectField';
+
 export type FormFieldProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
@@ -10,8 +12,9 @@ export type FormFieldProps<
   | TextFieldProps<TFieldValues, TName>
   | PasswordFieldProps<TFieldValues, TName>
   | NumberFieldProps<TFieldValues, TName>
+  | SelectFieldProps<TFieldValues, TName>
 ) & {
-  type: 'text' | 'password' | 'number';
+  type: 'text' | 'password' | 'number' | 'select';
 };
 
 const FormField = <
@@ -32,6 +35,11 @@ const FormField = <
 
   if (type === 'number') {
     return <NumberField {...rest} />;
+  }
+
+  if (type === 'select') {
+    // @ts-ignore
+    return <SelectField {...rest} />;
   }
 
   return null;
