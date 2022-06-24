@@ -1,4 +1,4 @@
-import { MouseEvent, ReactNode, useMemo } from 'react';
+import { MouseEvent, useMemo } from 'react';
 
 import {
   createTable,
@@ -11,7 +11,6 @@ import {
 import {
   Box,
   Checkbox,
-  Skeleton,
   Table,
   TableBody,
   TableCell,
@@ -21,17 +20,12 @@ import {
   TableProps,
   TableRow,
 } from '@mui/material';
+import NoRowsOverlay from 'components/NoRowsOverlay';
+import LoadingSkeleton from 'components/LoadingSkeleton';
 
-export type ColDef<TDataItem> = {
-  name: keyof TDataItem;
-  header: ReactNode;
-  visible?: boolean;
-
-  width?: number;
-  minWidth?: number;
-  maxWidth?: number;
-  resizable?: boolean;
-};
+import { ColDef } from './types';
+import { COLUMN_SELECTION_ID } from './constants';
+import DataGridRow from 'components/DataGridRow';
 
 type PaginationProps = {
   pageSize: number;
@@ -49,8 +43,6 @@ type DataGridProps<TDataItem> = {
   onPaginationChange?: OnChangeFn<PaginationState>;
   loading?: boolean;
 };
-
-const COLUMN_SELECTION_ID = '__selection__';
 
 const DataGrid = <TDataItem,>(props: DataGridProps<TDataItem>) => {
   const {
@@ -117,6 +109,8 @@ const DataGrid = <TDataItem,>(props: DataGridProps<TDataItem>) => {
     onPaginationChange: props.onPaginationChange,
   });
 
+  const colCount = tableInstance.getAllColumns().length;
+
   const handleChangePage = (event: MouseEvent<HTMLButtonElement> | null, page: number) => {
     event?.preventDefault();
 
@@ -158,7 +152,7 @@ const DataGrid = <TDataItem,>(props: DataGridProps<TDataItem>) => {
                           top: (theme) => theme.spacing(2),
                           right: (theme) => theme.spacing(0.25),
                           height: (theme) => theme.spacing(3),
-                          width: (theme) => theme.spacing(0.5),
+                          width: 2,
                           backgroundColor: (theme) => theme.palette.action.disabledBackground,
                           cursor: 'col-resize',
                           userSelect: 'none',
@@ -176,49 +170,16 @@ const DataGrid = <TDataItem,>(props: DataGridProps<TDataItem>) => {
           ))}
         </TableHead>
         <TableBody>
-          {loading &&
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
-              <TableRow key={index}>
-                {tableInstance.getAllColumns().map((column) => {
-                  if (!column.getIsVisible()) return null;
+          {loading && <LoadingSkeleton colCount={colCount} />}
 
-                  const resizable = props.colDefs.some(
-                    (colDef) => colDef.name === column.id && colDef.resizable
-                  );
+          {!loading && props.data.length === 0 && <NoRowsOverlay colSpan={colCount} />}
 
-                  return (
-                    <TableCell key={column.id} width={resizable ? column.getSize() : undefined}>
-                      <Skeleton animation="wave" />
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
-          {!loading &&
-            tableInstance.getRowModel().rows.map((row) => {
-              return (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    const resizable = props.colDefs.some(
-                      (colDef) => colDef.name === cell.column.id && colDef.resizable
-                    );
-
-                    return (
-                      <TableCell
-                        key={cell.id}
-                        padding={cell.column.id === COLUMN_SELECTION_ID ? 'checkbox' : 'normal'}
-                        width={resizable ? cell.column.getSize() : undefined}
-                      >
-                        {cell.renderCell()}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
+          {!loading && props.data.length > 0 && (
+            <DataGridRow colDefs={props.colDefs} rows={tableInstance.getRowModel().rows} />
+          )}
         </TableBody>
       </Table>
-      {!loading && (
+      {!loading && props.data.length > 0 && (
         <TablePagination
           component="div"
           showFirstButton={tableInstance.getCanPreviousPage()}
