@@ -4,8 +4,9 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "g:test": "ROOT=$INIT_CWD jest -i",
-    "g:test:cov": "ROOT=$INIT_CWD jest -i --coverage"
+    "g:auto-test:record": "playwright code gen",
+    "g:auto-test": "playwright test",
+    "g:auto-test:headed": "playwright test --headed"
   },
   "devDependencies": {
     "@playwright/test": "^1.22.2",
