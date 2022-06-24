@@ -34,10 +34,7 @@ const TextField = <
       render={({ field, fieldState }) => (
         <TextInput
           {...restInputProps}
-          ref={field.ref}
-          onChange={field.onChange}
-          onBlur={field.onBlur}
-          name={field.name}
+          {...field}
           error={error || !!fieldState.error}
           helperText={fieldState.error ? fieldState.error.message : helperText}
         />

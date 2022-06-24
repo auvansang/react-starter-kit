@@ -34,10 +34,7 @@ const PasswordField = <
       render={({ field, fieldState }) => (
         <PasswordInput
           {...restInputProps}
-          ref={field.ref}
-          onChange={field.onChange}
-          onBlur={field.onBlur}
-          name={field.name}
+          {...field}
           error={error || !!fieldState.error}
           helperText={fieldState.error ? fieldState.error.message : helperText}
         />
