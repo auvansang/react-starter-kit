@@ -5,6 +5,7 @@ import NumberField, { type NumberFieldProps } from './NumberField';
 
 import SelectField, { type SelectFieldProps } from './SelectField';
 import DateTimeField, { type DateTimeFieldProps } from './DateTimeField';
+import DateField, { type DateFieldProps } from './DateField';
 
 export type FormFieldProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -15,8 +16,9 @@ export type FormFieldProps<
   | NumberFieldProps<TFieldValues, TName>
   | SelectFieldProps<TFieldValues, TName>
   | DateTimeFieldProps<TFieldValues, TName>
+  | DateFieldProps<TFieldValues, TName>
 ) & {
-  type: 'text' | 'password' | 'number' | 'select' | 'date-time';
+  type: 'text' | 'password' | 'number' | 'select' | 'date-time' | 'date';
 };
 
 const FormField = <
@@ -45,7 +47,13 @@ const FormField = <
   }
 
   if (type === 'date-time') {
+    // @ts-ignore
     return <DateTimeField {...rest} />;
+  }
+
+  if (type === 'date') {
+    // @ts-ignore
+    return <DateField {...rest} />;
   }
 
   return null;

@@ -22,7 +22,10 @@ const DateTimeInput = (props: DateTimeInputProps) => {
           <TextInput
             {...restProps}
             inputRef={inputRef}
-            inputProps={inputProps}
+            inputProps={{
+              ...inputProps,
+              placeholder: restProps?.placeholder || inputProps?.placeholder,
+            }}
             startAdornment={InputProps?.startAdornment}
             endAdornment={InputProps?.endAdornment}
           />
