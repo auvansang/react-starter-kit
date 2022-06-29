@@ -8,6 +8,7 @@ export { default as PasswordField } from './PasswordField';
 export { default as NumberField } from './NumberField';
 
 export { default as SelectField } from './SelectField';
+export { default as AutocompleteField } from './AutocompleteField';
 
 export { default as DateTimeField } from './DateTimeField';
 export { default as DateField } from './DateField';

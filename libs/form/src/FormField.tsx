@@ -4,6 +4,8 @@ import PasswordField, { type PasswordFieldProps } from './PasswordField';
 import NumberField, { type NumberFieldProps } from './NumberField';
 
 import SelectField, { type SelectFieldProps } from './SelectField';
+import AutocompleteField, { type AutocompleteFieldProps } from './AutocompleteField';
+
 import DateTimeField, { type DateTimeFieldProps } from './DateTimeField';
 import DateField, { type DateFieldProps } from './DateField';
 import TimeField, { type TimeFieldProps } from './TimeField';
@@ -20,7 +22,8 @@ type FieldType =
   | 'date'
   | 'time'
   | 'checkbox'
-  | 'checkbox-group';
+  | 'checkbox-group'
+  | 'autocomplete';
 
 type FieldProps<T extends FieldType, K> = {
   type: T;
@@ -38,7 +41,8 @@ export type FormFieldProps<
   | FieldProps<'date', DateFieldProps<TFieldValues, TName>>
   | FieldProps<'time', TimeFieldProps<TFieldValues, TName>>
   | FieldProps<'checkbox', CheckboxFieldProps<TFieldValues, TName>>
-  | FieldProps<'checkbox-group', CheckboxGroupFieldProps<TFieldValues, TName>>;
+  | FieldProps<'checkbox-group', CheckboxGroupFieldProps<TFieldValues, TName>>
+  | FieldProps<'autocomplete', AutocompleteFieldProps<TFieldValues, TName>>;
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
@@ -82,6 +86,10 @@ const FormField = <
 
   if (type === 'checkbox-group') {
     return <CheckboxGroupField {...(rest as CheckboxGroupFieldProps<TFieldValues, TName>)} />;
+  }
+
+  if (type === 'autocomplete') {
+    return <AutocompleteField {...(rest as AutocompleteFieldProps<TFieldValues, TName>)} />;
   }
 
   return null;
