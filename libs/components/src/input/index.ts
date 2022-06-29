@@ -7,7 +7,7 @@ export { default as DateTimeInput, type DateTimeInputProps } from './DateTimeInp
 export { default as AutocompleteInput } from './AutocompleteInput';
 export { default as SelectInput, type SelectInputProps } from './SelectInput';
 export { default as SwitchInput } from './SwitchInput';
-export { default as CheckboxInput } from './CheckboxInput';
+export { default as CheckboxInput, type CheckboxInputProps } from './CheckboxInput';
 export { default as CheckboxGroupInput } from './CheckboxGroupInput';
 export { default as RadioInput } from './RadioInput';
 export { default as RadioGroupInput } from './RadioGroupInput';
