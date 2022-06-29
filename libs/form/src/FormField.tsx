@@ -6,21 +6,36 @@ import NumberField, { type NumberFieldProps } from './NumberField';
 import SelectField, { type SelectFieldProps } from './SelectField';
 import DateTimeField, { type DateTimeFieldProps } from './DateTimeField';
 import DateField, { type DateFieldProps } from './DateField';
-import TimeField from 'TimeField';
+import TimeField, { type TimeFieldProps } from './TimeField';
+
+import CheckboxField, { type CheckboxFieldProps } from './CheckboxField';
+
+type FieldType =
+  | 'text'
+  | 'password'
+  | 'number'
+  | 'select'
+  | 'date-time'
+  | 'date'
+  | 'time'
+  | 'checkbox';
+
+type FieldProps<T extends FieldType, K> = {
+  type: T;
+} & K;
 
 export type FormFieldProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = (
-  | TextFieldProps<TFieldValues, TName>
-  | PasswordFieldProps<TFieldValues, TName>
-  | NumberFieldProps<TFieldValues, TName>
-  | SelectFieldProps<TFieldValues, TName>
-  | DateTimeFieldProps<TFieldValues, TName>
-  | DateFieldProps<TFieldValues, TName>
-) & {
-  type: 'text' | 'password' | 'number' | 'select' | 'date-time' | 'date' | 'time';
-};
+> =
+  | FieldProps<'text', TextFieldProps<TFieldValues, TName>>
+  | FieldProps<'password', PasswordFieldProps<TFieldValues, TName>>
+  | FieldProps<'number', NumberFieldProps<TFieldValues, TName>>
+  | FieldProps<'select', SelectFieldProps<TFieldValues, TName>>
+  | FieldProps<'date-time', DateTimeFieldProps<TFieldValues, TName>>
+  | FieldProps<'date', DateFieldProps<TFieldValues, TName>>
+  | FieldProps<'time', TimeFieldProps<TFieldValues, TName>>
+  | FieldProps<'checkbox', CheckboxFieldProps<TFieldValues, TName>>;
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
@@ -31,35 +46,35 @@ const FormField = <
   const { type, ...rest } = props;
 
   if (type === 'text') {
-    return <TextField {...rest} />;
+    return <TextField {...(rest as TextFieldProps<TFieldValues, TName>)} />;
   }
 
   if (type === 'password') {
-    return <PasswordField {...rest} />;
+    return <PasswordField {...(rest as PasswordFieldProps<TFieldValues, TName>)} />;
   }
 
   if (type === 'number') {
-    return <NumberField {...rest} />;
+    return <NumberField {...(rest as NumberFieldProps<TFieldValues, TName>)} />;
   }
 
   if (type === 'select') {
-    // @ts-ignore
-    return <SelectField {...rest} />;
+    return <SelectField {...(rest as SelectFieldProps<TFieldValues, TName>)} />;
   }
 
   if (type === 'date-time') {
-    // @ts-ignore
-    return <DateTimeField {...rest} />;
+    return <DateTimeField {...(rest as DateTimeFieldProps<TFieldValues, TName>)} />;
   }
 
   if (type === 'date') {
-    // @ts-ignore
-    return <DateField {...rest} />;
+    return <DateField {...(rest as DateFieldProps<TFieldValues, TName>)} />;
   }
 
   if (type === 'time') {
-    // @ts-ignore
-    return <TimeField {...rest} />;
+    return <TimeField {...(rest as TimeFieldProps<TFieldValues, TName>)} />;
+  }
+
+  if (type === 'checkbox') {
+    return <CheckboxField {...(rest as CheckboxFieldProps<TFieldValues, TName>)} />;
   }
 
   return null;
