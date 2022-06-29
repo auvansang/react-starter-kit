@@ -15,11 +15,11 @@ export type CheckboxInputProps = CheckboxProps & {
 };
 
 const CheckboxInput = (props: CheckboxInputProps) => {
-  const { label, error, helperText, value, ...restProps } = props;
+  const { label, error, helperText, ...restProps } = props;
 
   return (
     <FormControl>
-      <FormControlLabel label={label} control={<Checkbox checked={!!value} {...restProps} />} />
+      <FormControlLabel label={label} control={<Checkbox {...restProps} />} />
       {(error || helperText) && (
         <FormHelperText error={!!error} sx={{ ml: 0 }}>
           {helperText}

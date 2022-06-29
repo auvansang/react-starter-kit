@@ -7,24 +7,24 @@ import {
   UnpackNestedValue,
 } from 'react-hook-form';
 
-import { CheckboxInput, type CheckboxInputProps } from '@sa/components';
+import { CheckboxGroupInput, type CheckboxGroupInputProps } from '@sa/components';
 
-export type CheckboxFieldProps<
+export type CheckboxGroupFieldProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = Omit<CheckboxInputProps, 'name' | 'onChange' | 'onBlur' | 'defaultValue'> & {
+> = Omit<CheckboxGroupInputProps, 'onChange' | 'defaultValue'> & {
   name: TName;
   control?: Control<TFieldValues>;
   defaultValue?: UnpackNestedValue<FieldPathValue<TFieldValues, TName>>;
 };
 
-const CheckboxField = <
+const CheckboxGroupField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >(
-  props: CheckboxFieldProps<TFieldValues, TName>
+  props: CheckboxGroupFieldProps<TFieldValues, TName>
 ) => {
-  const { name, control, defaultValue, error, helperText, ...restInputProps } = props;
+  const { name, control, defaultValue, error, helperText, options, ...restInputProps } = props;
 
   return (
     <Controller
@@ -32,10 +32,11 @@ const CheckboxField = <
       control={control}
       defaultValue={defaultValue}
       render={({ field, fieldState }) => (
-        <CheckboxInput
+        <CheckboxGroupInput
           {...restInputProps}
           {...field}
-          checked={!!field.value}
+          defaultValue={field.value}
+          options={options}
           error={error || !!fieldState.error}
           helperText={fieldState.error ? fieldState.error.message : helperText}
         />
@@ -44,4 +45,4 @@ const CheckboxField = <
   );
 };
 
-export default CheckboxField;
+export default CheckboxGroupField;

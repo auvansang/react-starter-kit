@@ -9,6 +9,7 @@ import DateField, { type DateFieldProps } from './DateField';
 import TimeField, { type TimeFieldProps } from './TimeField';
 
 import CheckboxField, { type CheckboxFieldProps } from './CheckboxField';
+import CheckboxGroupField, { type CheckboxGroupFieldProps } from './CheckboxGroupField';
 
 type FieldType =
   | 'text'
@@ -18,7 +19,8 @@ type FieldType =
   | 'date-time'
   | 'date'
   | 'time'
-  | 'checkbox';
+  | 'checkbox'
+  | 'checkbox-group';
 
 type FieldProps<T extends FieldType, K> = {
   type: T;
@@ -35,7 +37,8 @@ export type FormFieldProps<
   | FieldProps<'date-time', DateTimeFieldProps<TFieldValues, TName>>
   | FieldProps<'date', DateFieldProps<TFieldValues, TName>>
   | FieldProps<'time', TimeFieldProps<TFieldValues, TName>>
-  | FieldProps<'checkbox', CheckboxFieldProps<TFieldValues, TName>>;
+  | FieldProps<'checkbox', CheckboxFieldProps<TFieldValues, TName>>
+  | FieldProps<'checkbox-group', CheckboxGroupFieldProps<TFieldValues, TName>>;
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
@@ -75,6 +78,10 @@ const FormField = <
 
   if (type === 'checkbox') {
     return <CheckboxField {...(rest as CheckboxFieldProps<TFieldValues, TName>)} />;
+  }
+
+  if (type === 'checkbox-group') {
+    return <CheckboxGroupField {...(rest as CheckboxGroupFieldProps<TFieldValues, TName>)} />;
   }
 
   return null;

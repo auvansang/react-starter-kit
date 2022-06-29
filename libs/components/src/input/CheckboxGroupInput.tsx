@@ -5,7 +5,7 @@ import CheckboxInput from './CheckboxInput';
 
 import { type Option } from './types';
 
-type CheckboxGroupInputProps = {
+export type CheckboxGroupInputProps = {
   label?: ReactNode;
   helperText?: ReactNode;
   error?: boolean;
@@ -58,7 +58,11 @@ const CheckboxGroupInput = (props: CheckboxGroupInputProps) => {
           />
         ))}
       </FormGroup>
-      {(error || helperText) && <FormHelperText sx={{ ml: 0 }}>{helperText}</FormHelperText>}
+      {(error || helperText) && (
+        <FormHelperText error={error} sx={{ ml: 0 }}>
+          {helperText}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 };

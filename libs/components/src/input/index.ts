@@ -8,7 +8,7 @@ export { default as AutocompleteInput } from './AutocompleteInput';
 export { default as SelectInput, type SelectInputProps } from './SelectInput';
 export { default as SwitchInput } from './SwitchInput';
 export { default as CheckboxInput, type CheckboxInputProps } from './CheckboxInput';
-export { default as CheckboxGroupInput } from './CheckboxGroupInput';
+export { default as CheckboxGroupInput, type CheckboxGroupInputProps } from './CheckboxGroupInput';
 export { default as RadioInput } from './RadioInput';
 export { default as RadioGroupInput } from './RadioGroupInput';
 export { default as SliderInput } from './SliderInput';
