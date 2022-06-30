@@ -13,6 +13,8 @@ import TimeField, { type TimeFieldProps } from './TimeField';
 import CheckboxField, { type CheckboxFieldProps } from './CheckboxField';
 import CheckboxGroupField, { type CheckboxGroupFieldProps } from './CheckboxGroupField';
 
+import RadioGroupField, { type RadioGroupFieldProps } from './RadioGroupField';
+
 type FieldType =
   | 'text'
   | 'password'
@@ -23,6 +25,7 @@ type FieldType =
   | 'time'
   | 'checkbox'
   | 'checkbox-group'
+  | 'radio-group'
   | 'autocomplete';
 
 type FieldProps<T extends FieldType, K> = {
@@ -42,7 +45,8 @@ export type FormFieldProps<
   | FieldProps<'time', TimeFieldProps<TFieldValues, TName>>
   | FieldProps<'checkbox', CheckboxFieldProps<TFieldValues, TName>>
   | FieldProps<'checkbox-group', CheckboxGroupFieldProps<TFieldValues, TName>>
-  | FieldProps<'autocomplete', AutocompleteFieldProps<TFieldValues, TName>>;
+  | FieldProps<'autocomplete', AutocompleteFieldProps<TFieldValues, TName>>
+  | FieldProps<'radio-group', RadioGroupFieldProps<TFieldValues, TName>>;
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
@@ -90,6 +94,10 @@ const FormField = <
 
   if (type === 'autocomplete') {
     return <AutocompleteField {...(rest as AutocompleteFieldProps<TFieldValues, TName>)} />;
+  }
+
+  if (type === 'radio-group') {
+    return <RadioGroupField {...(rest as RadioGroupFieldProps<TFieldValues, TName>)} />;
   }
 
   return null;

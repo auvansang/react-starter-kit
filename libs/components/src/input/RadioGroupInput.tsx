@@ -5,7 +5,7 @@ import RadioInput from './RadioInput';
 
 import { type Option } from './types';
 
-type RadioGroupInputProps = Omit<RadioGroupProps, 'row'> & {
+export type RadioGroupInputProps = Omit<RadioGroupProps, 'row'> & {
   label?: ReactNode;
   helperText?: ReactNode;
   error?: boolean;
@@ -18,14 +18,18 @@ const RadioGroupInput = (props: RadioGroupInputProps) => {
   const row = direction === 'row';
 
   return (
-    <FormControl>
+    <FormControl error={error}>
       {label && <FormLabel>{label}</FormLabel>}
       <RadioGroup {...restProps} row={row}>
         {props.options.map((option) => (
           <RadioInput key={option.value} {...option} />
         ))}
       </RadioGroup>
-      {(error || helperText) && <FormHelperText sx={{ ml: 0 }}>{helperText}</FormHelperText>}
+      {(error || helperText) && (
+        <FormHelperText error={error} sx={{ ml: 0 }}>
+          {helperText}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 };

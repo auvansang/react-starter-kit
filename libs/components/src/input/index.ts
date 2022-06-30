@@ -10,7 +10,7 @@ export { default as SwitchInput } from './SwitchInput';
 export { default as CheckboxInput, type CheckboxInputProps } from './CheckboxInput';
 export { default as CheckboxGroupInput, type CheckboxGroupInputProps } from './CheckboxGroupInput';
 export { default as RadioInput } from './RadioInput';
-export { default as RadioGroupInput } from './RadioGroupInput';
+export { default as RadioGroupInput, type RadioGroupInputProps } from './RadioGroupInput';
 export { default as SliderInput } from './SliderInput';
 export { default as RatingInput } from './RatingInput';
 
