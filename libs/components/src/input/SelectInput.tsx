@@ -3,7 +3,7 @@ import { ReactNode, useId } from 'react';
 import { MenuItem, Select } from '@mui/material';
 import TextInput, { TextInputProps } from './TextInput';
 
-type SelectInputProps = TextInputProps & {
+export type SelectInputProps = TextInputProps & {
   options: Array<{
     label: ReactNode;
     value: string | number;

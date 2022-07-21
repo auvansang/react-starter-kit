@@ -1,10 +1,11 @@
 import { DatePicker, DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 
-import TextInput from './TextInput';
+import TextInput, { type TextInputProps } from './TextInput';
 
-export type DateInputProps = Omit<DatePickerProps<unknown, unknown>, 'renderInput' | 'value'> & {
-  value?: unknown;
-};
+export type DateInputProps = Omit<DatePickerProps<unknown, unknown>, 'renderInput' | 'value'> &
+  Omit<TextInputProps, 'value'> & {
+    value?: unknown;
+  };
 
 const DateInput = (props: DateInputProps) => {
   const { value = null, ...restProps } = props;
@@ -13,14 +14,20 @@ const DateInput = (props: DateInputProps) => {
     <DatePicker
       value={value}
       {...restProps}
-      renderInput={({ InputProps, inputRef, inputProps }) => (
-        <TextInput
-          inputRef={inputRef}
-          inputProps={inputProps}
-          startAdornment={InputProps?.startAdornment}
-          endAdornment={InputProps?.endAdornment}
-        />
-      )}
+      renderInput={({ InputProps, inputRef, inputProps }) => {
+        return (
+          <TextInput
+            {...restProps}
+            inputRef={inputRef}
+            inputProps={{
+              ...inputProps,
+              placeholder: restProps?.placeholder || inputProps?.placeholder,
+            }}
+            startAdornment={InputProps?.startAdornment}
+            endAdornment={InputProps?.endAdornment}
+          />
+        );
+      }}
     />
   );
 };

@@ -7,24 +7,24 @@ import {
   UnpackNestedValue,
 } from 'react-hook-form';
 
-import { TextInput, type TextInputProps } from '@sa/components';
+import { RadioGroupInput, type RadioGroupInputProps } from '@sa/components';
 
-export type TextFieldProps<
+export type RadioGroupFieldProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = Omit<TextInputProps, 'ref' | 'name' | 'onChange' | 'onBlur' | 'defaultValue'> & {
+> = Omit<RadioGroupInputProps, 'name' | 'onChange' | 'onBlur' | 'defaultValue'> & {
   name: TName;
   control?: Control<TFieldValues>;
   defaultValue?: UnpackNestedValue<FieldPathValue<TFieldValues, TName>>;
 };
 
-const TextField = <
+const RadioGroupField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >(
-  props: TextFieldProps<TFieldValues, TName>
+  props: RadioGroupFieldProps<TFieldValues, TName>
 ) => {
-  const { name, control, defaultValue, error, helperText, ...restInputProps } = props;
+  const { name, control, defaultValue, error, helperText, options, ...restInputProps } = props;
 
   return (
     <Controller
@@ -32,9 +32,11 @@ const TextField = <
       control={control}
       defaultValue={defaultValue}
       render={({ field, fieldState }) => (
-        <TextInput
+        <RadioGroupInput
           {...restInputProps}
           {...field}
+          defaultValue={field.value}
+          options={options}
           error={error || !!fieldState.error}
           helperText={fieldState.error ? fieldState.error.message : helperText}
         />
@@ -43,4 +45,4 @@ const TextField = <
   );
 };
 
-export default TextField;
+export default RadioGroupField;

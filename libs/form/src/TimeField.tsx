@@ -7,22 +7,22 @@ import {
   UnpackNestedValue,
 } from 'react-hook-form';
 
-import { TextInput, type TextInputProps } from '@sa/components';
+import { TimeInput, type TimeInputProps } from '@sa/components';
 
-export type TextFieldProps<
+export type TimeFieldProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = Omit<TextInputProps, 'ref' | 'name' | 'onChange' | 'onBlur' | 'defaultValue'> & {
+> = Omit<TimeInputProps, 'name' | 'onChange' | 'onBlur' | 'defaultValue' | 'onError'> & {
   name: TName;
   control?: Control<TFieldValues>;
   defaultValue?: UnpackNestedValue<FieldPathValue<TFieldValues, TName>>;
 };
 
-const TextField = <
+const TimeField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >(
-  props: TextFieldProps<TFieldValues, TName>
+  props: TimeFieldProps<TFieldValues, TName>
 ) => {
   const { name, control, defaultValue, error, helperText, ...restInputProps } = props;
 
@@ -32,7 +32,7 @@ const TextField = <
       control={control}
       defaultValue={defaultValue}
       render={({ field, fieldState }) => (
-        <TextInput
+        <TimeInput
           {...restInputProps}
           {...field}
           error={error || !!fieldState.error}
@@ -43,4 +43,4 @@ const TextField = <
   );
 };
 
-export default TextField;
+export default TimeField;

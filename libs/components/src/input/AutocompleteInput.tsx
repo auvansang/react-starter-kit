@@ -17,7 +17,7 @@ import TextInput, { TextInputProps } from './TextInput';
 
 interface AutocompleteInputOption extends Option {}
 
-type AutocompleteInputProps<
+export type AutocompleteInputProps<
   T extends AutocompleteInputOption,
   Multiple extends boolean | undefined,
   DisableClearable extends boolean | undefined,
@@ -90,6 +90,7 @@ const AutocompleteInput = <
           label={label}
           helperText={helperText}
           error={error}
+          placeholder={restProps.placeholder}
         />
       )}
     />

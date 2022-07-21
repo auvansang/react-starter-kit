@@ -7,22 +7,22 @@ import {
   UnpackNestedValue,
 } from 'react-hook-form';
 
-import { TextInput, type TextInputProps } from '@sa/components';
+import { DateInput, type DateInputProps } from '@sa/components';
 
-export type TextFieldProps<
+export type DateFieldProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = Omit<TextInputProps, 'ref' | 'name' | 'onChange' | 'onBlur' | 'defaultValue'> & {
+> = Omit<DateInputProps, 'name' | 'onChange' | 'onBlur' | 'defaultValue' | 'onError'> & {
   name: TName;
   control?: Control<TFieldValues>;
   defaultValue?: UnpackNestedValue<FieldPathValue<TFieldValues, TName>>;
 };
 
-const TextField = <
+const DateField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >(
-  props: TextFieldProps<TFieldValues, TName>
+  props: DateFieldProps<TFieldValues, TName>
 ) => {
   const { name, control, defaultValue, error, helperText, ...restInputProps } = props;
 
@@ -32,7 +32,7 @@ const TextField = <
       control={control}
       defaultValue={defaultValue}
       render={({ field, fieldState }) => (
-        <TextInput
+        <DateInput
           {...restInputProps}
           {...field}
           error={error || !!fieldState.error}
@@ -43,4 +43,4 @@ const TextField = <
   );
 };
 
-export default TextField;
+export default DateField;

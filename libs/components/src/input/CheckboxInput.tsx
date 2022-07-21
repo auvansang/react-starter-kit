@@ -8,7 +8,7 @@ import {
   CheckboxProps,
 } from '@mui/material';
 
-type CheckboxInputProps = CheckboxProps & {
+export type CheckboxInputProps = CheckboxProps & {
   label?: ReactNode;
   helperText?: ReactNode;
   error?: boolean;
@@ -20,7 +20,11 @@ const CheckboxInput = (props: CheckboxInputProps) => {
   return (
     <FormControl>
       <FormControlLabel label={label} control={<Checkbox {...restProps} />} />
-      {(error || helperText) && <FormHelperText sx={{ ml: 0 }}>{helperText}</FormHelperText>}
+      {(error || helperText) && (
+        <FormHelperText error={!!error} sx={{ ml: 0 }}>
+          {helperText}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 };

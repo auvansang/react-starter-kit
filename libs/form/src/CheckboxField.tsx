@@ -7,22 +7,22 @@ import {
   UnpackNestedValue,
 } from 'react-hook-form';
 
-import { TextInput, type TextInputProps } from '@sa/components';
+import { CheckboxInput, type CheckboxInputProps } from '@sa/components';
 
-export type TextFieldProps<
+export type CheckboxFieldProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = Omit<TextInputProps, 'ref' | 'name' | 'onChange' | 'onBlur' | 'defaultValue'> & {
+> = Omit<CheckboxInputProps, 'name' | 'onChange' | 'onBlur' | 'defaultValue'> & {
   name: TName;
   control?: Control<TFieldValues>;
   defaultValue?: UnpackNestedValue<FieldPathValue<TFieldValues, TName>>;
 };
 
-const TextField = <
+const CheckboxField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >(
-  props: TextFieldProps<TFieldValues, TName>
+  props: CheckboxFieldProps<TFieldValues, TName>
 ) => {
   const { name, control, defaultValue, error, helperText, ...restInputProps } = props;
 
@@ -32,9 +32,10 @@ const TextField = <
       control={control}
       defaultValue={defaultValue}
       render={({ field, fieldState }) => (
-        <TextInput
+        <CheckboxInput
           {...restInputProps}
           {...field}
+          checked={!!field.value}
           error={error || !!fieldState.error}
           helperText={fieldState.error ? fieldState.error.message : helperText}
         />
@@ -43,4 +44,4 @@ const TextField = <
   );
 };
 
-export default TextField;
+export default CheckboxField;

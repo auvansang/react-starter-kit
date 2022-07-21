@@ -7,24 +7,24 @@ import {
   UnpackNestedValue,
 } from 'react-hook-form';
 
-import { TextInput, type TextInputProps } from '@sa/components';
+import { SelectInput, type SelectInputProps } from '@sa/components';
 
-export type TextFieldProps<
+export type SelectFieldProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = Omit<TextInputProps, 'ref' | 'name' | 'onChange' | 'onBlur' | 'defaultValue'> & {
+> = Omit<SelectInputProps, 'name' | 'onChange' | 'onBlur' | 'defaultValue'> & {
   name: TName;
   control?: Control<TFieldValues>;
   defaultValue?: UnpackNestedValue<FieldPathValue<TFieldValues, TName>>;
 };
 
-const TextField = <
+const SelectField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >(
-  props: TextFieldProps<TFieldValues, TName>
+  props: SelectFieldProps<TFieldValues, TName>
 ) => {
-  const { name, control, defaultValue, error, helperText, ...restInputProps } = props;
+  const { options, name, control, defaultValue, error, helperText, ...restInputProps } = props;
 
   return (
     <Controller
@@ -32,15 +32,16 @@ const TextField = <
       control={control}
       defaultValue={defaultValue}
       render={({ field, fieldState }) => (
-        <TextInput
+        <SelectInput
           {...restInputProps}
           {...field}
           error={error || !!fieldState.error}
           helperText={fieldState.error ? fieldState.error.message : helperText}
+          options={options}
         />
       )}
     />
   );
 };
 
-export default TextField;
+export default SelectField;

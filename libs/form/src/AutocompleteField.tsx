@@ -7,24 +7,27 @@ import {
   UnpackNestedValue,
 } from 'react-hook-form';
 
-import { TextInput, type TextInputProps } from '@sa/components';
+import { AutocompleteInput, Option, type AutocompleteInputProps } from '@sa/components';
 
-export type TextFieldProps<
+export type AutocompleteFieldProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = Omit<TextInputProps, 'ref' | 'name' | 'onChange' | 'onBlur' | 'defaultValue'> & {
+> = Omit<
+  AutocompleteInputProps<Option, boolean | undefined, boolean | boolean | undefined, boolean>,
+  'onChange' | 'onBlur' | 'defaultValue'
+> & {
   name: TName;
   control?: Control<TFieldValues>;
   defaultValue?: UnpackNestedValue<FieldPathValue<TFieldValues, TName>>;
 };
 
-const TextField = <
+const AutocompleteField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >(
-  props: TextFieldProps<TFieldValues, TName>
+  props: AutocompleteFieldProps<TFieldValues, TName>
 ) => {
-  const { name, control, defaultValue, error, helperText, ...restInputProps } = props;
+  const { options, name, control, defaultValue, error, helperText, ...restInputProps } = props;
 
   return (
     <Controller
@@ -32,15 +35,17 @@ const TextField = <
       control={control}
       defaultValue={defaultValue}
       render={({ field, fieldState }) => (
-        <TextInput
+        <AutocompleteInput
           {...restInputProps}
           {...field}
+          onChange={(_, newValue) => field.onChange(newValue)}
           error={error || !!fieldState.error}
           helperText={fieldState.error ? fieldState.error.message : helperText}
+          options={options}
         />
       )}
     />
   );
 };
 
-export default TextField;
+export default AutocompleteField;
